@@ -3,6 +3,7 @@ from flask import current_app
 from config.database import db
 from bson import json_util, objectid
 import datetime
+import json
 
 api = Namespace('admin', description='Operaciones sobre un administrador')
 
@@ -47,7 +48,7 @@ class Admin(Resource):
       api.abort(409, status = "El email del administrador ya se encuentra registrado")
     
     if name:
-      idUser = db.db.admins.insert_one({
+      idUser = db.db.admins.insert({
           'image': image,
           'name':name,
           'surname': surname,
@@ -56,8 +57,7 @@ class Admin(Resource):
           'estatus': estatus
           })
       if idUser:
-        response = idUser
-      return response
+        return json.loads(json_util.dumps(idUser))
     else:
       api.abort(500, status = "Ocurrio un error en el proceso")
 
