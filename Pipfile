@@ -8,7 +8,9 @@ flask = "*"
 flask-restplus = "*"
 flask-cors = "*"
 dnspython = "*"
+werkzeug = "==0.16.1"
 gunicorn = "*"
+flask-pymongo = "*"
 
 [dev-packages]
 
